@@ -1,8 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import tw from 'tailwind-styled-components';
 import fakeUser from '../api';
-import { addUser } from '../store/slices/UserSlice';
+import { addUser, deleteUsers } from '../store/slices/UserSlice';
 import DisplayUsers from './DisplayUsers';
 import HrLine from './HrLine';
 
@@ -13,6 +13,8 @@ function UserDetails() {
     console.log(name);
     dispatch(addUser(name));
   };
+
+  const data = useSelector((state) => state.users);
   return (
     <Wrapper>
       <UserListWrapper>
@@ -21,7 +23,13 @@ function UserDetails() {
       </UserListWrapper>
       <HrLine />
       <DisplayUsers />
-      <ClearUserButton>Clear All User</ClearUserButton>
+      <ClearUserButton onClick={() => {
+        dispatch(deleteUsers(data.length));
+      }}
+      >
+        Clear All User
+
+      </ClearUserButton>
     </Wrapper>
   );
 }
