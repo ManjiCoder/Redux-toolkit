@@ -9,12 +9,21 @@ const userSlice = createSlice({
       // console.log(action.payload);
     },
     removeUser(state, action) {
-      state.pop();
+      // state.pop();
+      // By using name
+      // const deleteUser = action.payload;
+      // state.splice(deleteUser, 1);
+      // By using Id
+      console.log(action.payload); // return id of user like 2
+      // console.log(action.type); // return name of user like 2
+      state.splice(action.payload, 1);
     },
-    deleteUsers(state, action) {},
+    deleteUsers(state, action) {
+      console.log(action.payload);
+    },
   },
 });
 // console.log(userSlice.actions.addUser());
 
 export default userSlice.reducer;
-export const { addUser } = userSlice.actions;
+export const { addUser, removeUser } = userSlice.actions;
